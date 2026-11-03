@@ -1,0 +1,54 @@
+
+1-Creating a New Recipe
+
+User                  Frontend                      Backend                   Database
+ |                       |                             |                          |
+ |-- Clicks "Add Recipe"->|                             |                          |
+ |                       |-- Renders input form ------->|                          |
+ |-- Enters data & ----->|                             |                          |
+ |   clicks "Save"       |-- POST /recipes ----------->|                          |
+ |                       |   (recipe payload)          |-- Validates input & ---->|
+ |                       |                             |   persists record        |
+ |                       |                             |<-- Confirms insertion ---|
+ |                       |<-- HTTP 201 Created --------|                          |
+ |                       |   (returns new object)      |                          |
+ |<-- Renders updated ---|                             |                          |
+     recipe list         |                             |                          |
+
+
+
+2: Viewing a Specific Recipe
+
+
+     User                  Frontend                      Backend                   Database
+ |                       |                             |                          |
+ |-- Selects a recipe -->|                             |                          |
+ |                       |-- GET /recipes/:id -------->|                          |
+ |                       |                             |-- Queries record by ID ->|
+ |                       |                             |<-- Returns recipe data --|
+ |                       |                             |                          |
+ |                       |    [Success Path]           |                          |
+ |                       |<-- HTTP 200 OK -------------|                          |
+ |                       |                             |                          |
+ |                       |    [Error Path - Not Found] |                          |
+ |                       |<-- HTTP 404 Not Found ------|                          |
+ |                       |                             |                          |
+ |<-- Displays details --|                             |                          |
+     (or error state)    |                             |                          |
+
+
+
+3:Editing an Existing Recipe
+
+
+     User                  Frontend                      Backend                   Database
+ |                       |                             |                          |
+ |-- Clicks "Edit" ----->|                             |                          |
+ |                       |-- Populates edit form ----->|                          |
+ |-- Modifies fields & ->|                             |                          |
+ |   clicks "Save"       |-- PUT /recipes/:id -------->|                          |
+ |                       |   (updated payload)         |-- Validates & updates -->|
+ |                       |                             |<-- Confirms change ------|
+ |                       |<-- HTTP 200 OK -------------|                          |
+ |<-- Renders updated ---|                             |                          |
+     view on screen      |                             |                          |
